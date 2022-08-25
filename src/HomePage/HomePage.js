@@ -2,11 +2,15 @@ import React from "react";
 import AuthHoc from "./AuthHOC";
 import Button from '@mui/material/Button';
 import { Link , Outlet } from 'react-router-dom'
-import Search from "./Search";
 import { NewsContext} from '../Context/context';
 const Navbar=()=> {
 const[set,get]=React.useState("")
 const {setfun}=React.useContext(NewsContext)
+const Logout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("email");
+    };
+
 function handleChange(event){
   get(event.target.value);
 }
@@ -14,7 +18,7 @@ function handleChange(event){
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <a className="navbar-brand" href="_blank">
+          <a className="navbar-brand" >
             News App
           </a>
           <button
@@ -92,8 +96,8 @@ function handleChange(event){
               </form>
             </ul>
             <form className="d-flex">
-              <button className="btn btn btn-danger" type="submit" >
-                Logout
+              <button className="btn btn btn-danger" type="submit" onClick={Logout} >
+              <Link to="/"style={{textDecoration:'none' ,color:'whitesmoke'}}> Logout</Link> 
               </button>
             </form>
           </div>

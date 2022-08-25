@@ -11,7 +11,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import apiConfig from "../config";
 export default function Favouritecard(props) {
     function RemoveFromFavourite(value){
-        axios.delete(`${apiConfig.Favouritesapi}/DeleteFromFavourites/${value}`)
+      var d=localStorage.getItem("email")
+        axios.delete(`${apiConfig.Favouritesapi}/DeleteFromFavourites/?email=${d}&q=${value}`)
     }
   return (
     <Card sx={{ maxWidth: 345 }} >
@@ -29,8 +30,8 @@ export default function Favouritecard(props) {
       </Typography>
     </CardContent>
     <CardActions>
-    <Grid item xs={4}>
-    <Button variant="contained" >View</Button>
+    <Grid item xs={4} sx={{flexGrow:0.9}}>
+    <Button variant="contained" href={props.url}>View</Button>
       </Grid>
       <Grid item xs={8} >
         <DeleteIcon onClick={()=>{

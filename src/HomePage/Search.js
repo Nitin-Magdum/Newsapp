@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import { useNavigate } from "react-router-dom";
 import Showingcard from '../Cards/showingcard';
 import { NewsContext} from '../Context/context';
+import Container from '@mui/material/Container';
 const Search=()=> {
     const[set,get]=React.useState([])
     const {getfun}=React.useContext(NewsContext)
@@ -27,10 +28,12 @@ navigate('/Home')
     }
 })
   return (
+    <Container maxWidth="lm">
     <Box sx={{
-        display: 'grid',
-        gap: 1,
-        gridTemplateColumns: 'repeat(2, 1fr)',
+      bgcolor: '#cfe8fc',
+      display: 'grid',
+      gap: 1,
+      gridTemplateColumns: 'repeat(3, 1fr)'
       }} >{ 
             set.map((i)=>{
                 
@@ -42,6 +45,7 @@ navigate('/Home')
     
             })
    }</Box> 
+   </Container>
   )
 }
 

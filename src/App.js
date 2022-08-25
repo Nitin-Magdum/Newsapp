@@ -1,6 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 import SignUp from './sign-up/SignUp';
 import SignIn from './SignIn/SignIn';
 import HomePage from "./HomePage/HomePage";
@@ -17,9 +15,6 @@ import Search from './HomePage/Search';
 import { NewsContext} from './Context/context';
 function App() {
   const [getfun,setfun]=React.useState("")
-  const getSearch=(i)=>{
-    setfun(i)
-  }
   return (
     <div>
       <BrowserRouter>

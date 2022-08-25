@@ -29,15 +29,17 @@ export default function Showingcard(props) {
       </Typography>
     </CardContent>
     <CardActions>
-    <Grid item xs={4}>
-    <Button variant="contained" >View</Button>
+    <Grid item xs={4} sx={{flexGrow:0.9}}>
+    <Button variant="contained" href={props.url}>View</Button>
       </Grid>
       <Grid item xs={8} >
-        <FavoriteIcon onClick={()=>{
+        <FavoriteIcon  onClick={()=>{
           var values={
+            email:localStorage.getItem("email"),
             source:props.source,
             urlToImage:props.urlToImage,
-            description:props.description
+            description:props.description,
+            url:props.url
           }
           addToFavourite(values);
         }}/>

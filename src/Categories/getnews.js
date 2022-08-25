@@ -3,6 +3,7 @@ import apiConfig from "../config";
 import axios from "axios";
 import Box from '@mui/material/Box';
 import Showingcard from '../Cards/showingcard';
+import Container from '@mui/material/Container';
 export default function Getnews() {
     const[set,get]=React.useState([])
     var c=0;
@@ -18,10 +19,12 @@ export default function Getnews() {
         })
     })
   return (
+    <Container maxWidth="lm">
     <Box sx={{
-        display: 'grid',
-        gap: 1,
-        gridTemplateColumns: 'repeat(2, 1fr)',
+      bgcolor: '#cfe8fc',
+      display: 'grid',
+      gap: 1,
+      gridTemplateColumns: 'repeat(3, 1fr)'
       }} >{ 
             set.map((i)=>{
                 
@@ -33,5 +36,6 @@ return (
     
             })
    }</Box> 
+   </Container>
   )
 }
