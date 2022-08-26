@@ -10,6 +10,8 @@ import Getfavouritenews from './Categories/getfavouritenews';
 import  Gethealthnews from './Categories/gethealthnews';
 import  Getsciencenews from './Categories/getsciencenews';
 import  Getsportsnews from './Categories/getsportsnews';
+import Forgetpassword from './SignIn/ForgotPassword';
+import Profile from './Profile/profile';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Search from './HomePage/Search';
 import { NewsContext} from './Context/context';
@@ -22,6 +24,8 @@ function App() {
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/SignUp" element={<SignUp />} />
+          <Route path="/Forgetpassword" element={<Forgetpassword />} />
+          <Route path="/Profile" element={<Profile/>} />
 <Route path="/Home" element={<HomePage />}>
 <Route path="" element={<Getnews/>}/>
 <Route path="search" element={<Search />}/>

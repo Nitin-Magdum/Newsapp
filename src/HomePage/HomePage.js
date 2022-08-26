@@ -1,12 +1,18 @@
 import React from "react";
 import AuthHoc from "./AuthHOC";
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
 import { Link , Outlet } from 'react-router-dom'
 import { NewsContext} from '../Context/context';
 const Navbar=()=> {
+  const [anchorEl, setAnchorEl] = React.useState(null);
 const[set,get]=React.useState("")
 const {setfun}=React.useContext(NewsContext)
 const Logout = () => {
+  setAnchorEl(null);
         localStorage.removeItem("token");
         localStorage.removeItem("email");
     };
@@ -14,24 +20,47 @@ const Logout = () => {
 function handleChange(event){
   get(event.target.value);
 }
+const handleClose = () => {
+  setAnchorEl(null);
+};
+const handleMenu = (event) => {
+  setAnchorEl(event.currentTarget);
+};
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
+        <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={handleMenu}
+            sx={{ mr: 2}}
+          >
+            <MenuIcon sx={{color:'white'}}/>
+          </IconButton>
+          <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem sx={{bgcolor:"black"}}onClick={handleClose}><Link to="/Profile" style={{textDecoration:'none' ,color:'blue'}}>Profile</Link></MenuItem>
+                <MenuItem sx={{bgcolor:"black"}}onClick={Logout}><Link to="/" style={{textDecoration:'none' ,color:'blue'}}>Logout</Link></MenuItem>
+              </Menu>
           <a className="navbar-brand" >
             News App
           </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
@@ -95,11 +124,7 @@ function handleChange(event){
                 </Button>
               </form>
             </ul>
-            <form className="d-flex">
-              <button className="btn btn btn-danger" type="submit" onClick={Logout} >
-              <Link to="/"style={{textDecoration:'none' ,color:'whitesmoke'}}> Logout</Link> 
-              </button>
-            </form>
+            
           </div>
         </div>
       </nav>

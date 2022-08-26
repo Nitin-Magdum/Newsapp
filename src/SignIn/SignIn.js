@@ -118,7 +118,22 @@ export default function SignIn() {
               >
                 Sign In
               </Button>
+              
               <Box sx={{ m: 3 }} />
+              <Grid container>
+                <Grid
+                  item
+                  container
+                  spacing={0}
+                  direction="column"
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  <Link href="/Forgetpassword" variant="body2">
+                    {"Forget Paawsord ? "}
+                  </Link>
+                </Grid>
+              </Grid>
               <Grid container>
                 <Grid
                   item
