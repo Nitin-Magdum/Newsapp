@@ -15,9 +15,9 @@ export default function AuthHoc(Component) {
             }).then(res => res.json())
                 .then(data => {
                     if (data.status === 401) {
-                        navigate('/');
-                    } else {
                         return <Component />;
+                    } else {
+                        navigate('/')
                     }
                 });
         }, []);

@@ -9,10 +9,26 @@ import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Grid from '@mui/material/Grid';
 import apiConfig from "../config";
+import { useNavigate } from "react-router-dom";
 export default function Showingcard(props) {
+  const navigate = useNavigate();
   function addToFavourite(v){
-    axios.post(`${apiConfig.Favouritesapi}/AddToFavourites`,v)
+    fetch(`${apiConfig.authapi}/isAuthenticated`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+      }
+  }).then(res => res.json())
+      .then(data => {
+          if (data.status === 401) {
+              navigate('/SignIn');
+          } else {
+            axios.post(`${apiConfig.Favouritesapi}/AddToFavourites`,v)
+          }
+      });
   }
+  
   return (
     <Card sx={{ maxWidth: 345 }} >
     <CardMedia

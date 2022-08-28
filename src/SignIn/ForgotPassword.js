@@ -63,7 +63,19 @@ b(event.target.value)
   }
   function getotp(){
     var e={"email":a}
-axios.post(`${apiConfig.authapi}/forgotpassword`,e)
+    u("")
+    z("")
+    d("")
+axios.post(`${apiConfig.authapi}/forgotpassword`,e).then(data=>{
+  if(data.data.status==401){
+document.getElementById("exist").innerText="Email id doesn't exist"
+  }else{
+    document.getElementById("exist").innerText=""
+    document.getElementById("otp").innerText=""
+  document.getElementById("pass").innerText=""
+  document.getElementById("confirmpass").innerText=""
+  }
+})
   }
   function getreset(){
     var e={
@@ -72,8 +84,29 @@ axios.post(`${apiConfig.authapi}/forgotpassword`,e)
      "password":y,
      "confirmpassword":t
     }
-    axios.post(`${apiConfig.authapi}/setpassword`,e)
-  }
+    if(y.length==0){
+      document.getElementById("pass").innerText="password cannot be left blank"
+    }else if(t==""){
+      document.getElementById("confirmpass").innerText="confirm password cannot be left blank"
+    }else if(!(/^.{3,10}$/.test(y))&&!(/^.{3,10}$/.test(t))){
+      document.getElementById("pass").innerText="password should have minimum 3 characters"
+      document.getElementById("confirmpass").innerText="confirm password should have minimum 3 characters"
+    }else {
+    axios.post(`${apiConfig.authapi}/setpassword`,e).then(data=>{
+if(data.data.status==500){
+  document.getElementById("otp").innerText=data.data.msg
+}else if (data.data.status==400){
+  document.getElementById("pass").innerText=data.data.msg
+  document.getElementById("confirmpass").innerText=data.data.msg
+}else{
+    document.getElementById("otp").innerText=""
+    document.getElementById("pass").innerText=""
+    document.getElementById("confirmpass").innerText=""
+    navigate('/SignIn');
+
+}
+    })
+  }}
   const classes = useStyles();
 
   return (
@@ -133,6 +166,7 @@ axios.post(`${apiConfig.authapi}/forgotpassword`,e)
                           label="Enter Registered E-mail ID"
                           fullWidth
                         />
+                        <span id="exist" style={{color:'red'}}></span>
                       </Grid>
                       <Grid item xs={12}>
                         <Box sx={{ m: 1 }} />
@@ -157,6 +191,7 @@ axios.post(`${apiConfig.authapi}/forgotpassword`,e)
                           value={c}
                           onChange={handle}
                         />
+                         <span id="otp" style={{color:'red'}}></span>
                       </Grid>
                       <Grid item xs={12}>
                         <TextField
@@ -170,7 +205,7 @@ axios.post(`${apiConfig.authapi}/forgotpassword`,e)
                           label="New Password"
                           fullWidth
                         />
-            
+            <span id="pass" style={{color:'red'}}></span>
                       </Grid>
                       <Grid item xs={12}>
                         <TextField
@@ -184,6 +219,7 @@ axios.post(`${apiConfig.authapi}/forgotpassword`,e)
                           label="Confirm Password"
                           fullWidth
                         />
+                          <span id="confirmpass" style={{color:'red'}}></span>
                       </Grid>
                     </Grid>
                     <Box sx={{ m: 3 }} />
@@ -192,7 +228,6 @@ axios.post(`${apiConfig.authapi}/forgotpassword`,e)
                       variant="contained"
                       color="primary"
                       onClick={getreset}
-                      href="/"
                     >
                       Reset Password
                     </Button>

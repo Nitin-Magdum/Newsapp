@@ -53,7 +53,13 @@ export default function SignUp() {
         confirmpassword:''
     },onSubmit:values=>{
       axios.post(`${apiConfig.authapi}/register`, values)
-      .then(data => navigate('/'))
+      .then(data => {
+        if(data.data.status==409){
+console.log("User already exists")
+        }else{
+          navigate('/SignIn');
+        }
+      })
 
     },
     validationSchema:yup.object().shape({
@@ -83,37 +89,7 @@ export default function SignUp() {
 });
 const classes = useStyles();
 
-  // const [firstname, setFirstname] = useState("");
-  // const [lastname, setLastname] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const classes = useStyles();
-
-  // const signupUser = () => {
-  //   fetch(`${apiConfig.authapi}/register`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       firstname,
-  //       lastname,
-  //       email,
-  //       password,
-  //     }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       if (data.status === 200) {
-  //         console.log("Successfully registered");
-  //       }
-  //     });
-  // };
-
-  // function handleSubmit(event) {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  // }
+  
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
@@ -187,10 +163,10 @@ const classes = useStyles();
 </Grid>
 <Box sx={{ m: 3 }} />
 <Button
-                          type="submit"
+                         type="submit"  
                           fullWidth
                           variant="contained"                  
-                          color="primary"      
+                          color="primary"     
                         >
                           Sign Up
                         </Button>
@@ -208,7 +184,7 @@ const classes = useStyles();
                   alignItems="center"
                   justifyContent="center"
                 >
-                  <Link href="" variant="body2">
+                  <Link href="/SignIn" variant="body2">
                     {"Already Have Account? Sign-In "}
                   </Link>
                 </Grid>

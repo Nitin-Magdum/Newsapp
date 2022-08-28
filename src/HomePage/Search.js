@@ -14,7 +14,7 @@ const Search=()=> {
 React.useEffect(()=>{
     var a={getfun}
     if(a.getfun===""){
-navigate('/Home')
+navigate('/')
     }else{
         axios.get(`${apiConfig.thirdpartyapi}/news/search?q=${a.getfun}`,{
             headers: {

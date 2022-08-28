@@ -11,10 +11,12 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LoginIcon from "@mui/icons-material/Login";
+import AuthHoc from "../HomePage/AuthHOC";
 import apiConfig from "../config";
 const theme = createTheme();
 
-export default function SignIn() {
+
+ function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -31,9 +33,10 @@ export default function SignIn() {
         if (data.status === 200) {
           localStorage.setItem("token", data.token);
           localStorage.setItem("email", email);
-          navigate("/Home"); 
+          navigate("/"); 
         }
       });
+      console.log(document.cookie)
   };
 
   const handleSubmit = (event) => {
@@ -130,7 +133,7 @@ export default function SignIn() {
                   justifyContent="center"
                 >
                   <Link href="/Forgetpassword" variant="body2">
-                    {"Forget Paawsord ? "}
+                    {"Forgot Password ? "}
                   </Link>
                 </Grid>
               </Grid>
@@ -154,3 +157,4 @@ export default function SignIn() {
       </Grid>
     </ThemeProvider>
   )}
+  export default AuthHoc(SignIn);

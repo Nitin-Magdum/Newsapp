@@ -1,5 +1,6 @@
 import React from "react";
-import AuthHoc from "./AuthHOC";
+import apiConfig from "../config";
+import axios from "axios";
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -7,6 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { Link , Outlet } from 'react-router-dom'
 import { NewsContext} from '../Context/context';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 const Navbar=()=> {
   const [anchorEl, setAnchorEl] = React.useState(null);
 const[set,get]=React.useState("")
@@ -15,6 +17,9 @@ const Logout = () => {
   setAnchorEl(null);
         localStorage.removeItem("token");
         localStorage.removeItem("email");
+        axios.post(`${apiConfig.authapi}/logout`).then(data=>{
+    console.log(data)
+  })
     };
 
 function handleChange(event){
@@ -38,7 +43,7 @@ const handleMenu = (event) => {
             onClick={handleMenu}
             sx={{ mr: 2}}
           >
-            <MenuIcon sx={{color:'white'}}/>
+            <AccountCircle sx={{color:'white'}}/>
           </IconButton>
           <Menu
                 id="menu-appbar"
@@ -61,6 +66,17 @@ const handleMenu = (event) => {
           <a className="navbar-brand" >
             News App
           </a>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
@@ -132,4 +148,4 @@ const handleMenu = (event) => {
     </div>
   );
 }
-export default AuthHoc(Navbar);
+export default Navbar;

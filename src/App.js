@@ -22,11 +22,11 @@ function App() {
       <BrowserRouter>
       <NewsContext.Provider value={{getfun,setfun}}>
         <Routes>
-          <Route path="/" element={<SignIn />} />
+          <Route path="/SignIn" element={<SignIn />} />
           <Route path="/SignUp" element={<SignUp />} />
           <Route path="/Forgetpassword" element={<Forgetpassword />} />
           <Route path="/Profile" element={<Profile/>} />
-<Route path="/Home" element={<HomePage />}>
+<Route path="/" element={<HomePage />}>
 <Route path="" element={<Getnews/>}/>
 <Route path="search" element={<Search />}/>
 <Route path="favourite" element={<Getfavouritenews/>}/>
