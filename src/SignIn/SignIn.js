@@ -13,6 +13,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LoginIcon from "@mui/icons-material/Login";
 import AuthHoc from "../HomePage/AuthHOC";
 import apiConfig from "../config";
+import axios from "axios";
 const theme = createTheme();
 
 
@@ -21,22 +22,16 @@ const theme = createTheme();
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const Login = () => {
-    fetch(`${apiConfig.authapi}/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    })
-      .then((res) => res.json())
+    axios.post(`${apiConfig.authapi}/login`,{email,password})
       .then((data) => {
         if (data.status === 200) {
-          localStorage.setItem("token", data.token);
+          localStorage.setItem("token", data.data.token);
           localStorage.setItem("email", email);
           navigate("/"); 
+          document.getElementById("emailid").innerText=""
         }
       });
-      console.log(document.cookie)
+      // console.log(document.cookie)
   };
 
   const handleSubmit = (event) => {
@@ -99,6 +94,7 @@ const theme = createTheme();
                 autoComplete="email"
                 autoFocus
               />
+              <span id="emailid"></span>
               <Box sx={{ m: 3 }} />
               <TextField
                 onChange={(e) => setPassword(e.target.value)}
@@ -111,7 +107,7 @@ const theme = createTheme();
                 id="password"
                 autoComplete="current-password"
               />
-
+<span id="emailid"></span>
               <Button
                 onClick={Login}
                 type="submit"

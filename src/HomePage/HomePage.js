@@ -29,7 +29,7 @@ const Logout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("email");
         axios.post(`${apiConfig.authapi}/logout`).then(data=>{
-    console.log(data)
+    // console.log(data)
   })
     };
     React.useEffect(()=>{

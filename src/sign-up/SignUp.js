@@ -137,27 +137,27 @@ const classes = useStyles();
             <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
                     <TextField id="firstname" name="firstname" type="text" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.firstname}placeholder="First Name" variant="outlined"
-                     label="firstname" fullWidth />
+                     label="Firstname" fullWidth />
                     {formik.errors.firstname && formik.touched.firstname ? <span className="text-danger">{formik.errors.firstname}</span> : null}
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <TextField id="lastname" name="lastname" type="text" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.lastname} placeholder="Last Name" variant="outlined"
-                     label="lastname" fullWidth />
+                     label="Lastname" fullWidth />
                     {formik.errors.lastname && formik.touched.lastname ? <span className="text-danger">{formik.errors.lastname}</span> : null}
                     </Grid>
                     <Grid item xs={12}>
                     <TextField  id="email" name="email" type="text" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.email}  placeholder="Email" variant="outlined"
-                     label="email" fullWidth  />
+                     label="Email" fullWidth  />
                     {formik.errors.email && formik.touched.email ? <span className="text-danger">{formik.errors.email}</span> : null}
                     </Grid>
                     <Grid item xs={12}>
                     <TextField  id="password" name="password" type="password"onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.password}  placeholder="Password" variant="outlined"
-                     label="password" fullWidth />
+                     label="Password" fullWidth />
                     {formik.errors.password && formik.touched.password ? <span className="text-danger">{formik.errors.password}</span> : null}
                     </Grid>
                 <Grid item xs={12}>
                     <TextField  id="confirmpassword" name="confirmpassword" type="password" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.confirmpassword} placeholder="Confirm password" variant="outlined"
-                     label="confirmpassword" fullWidth />
+                     label="Confirmpassword" fullWidth />
                     {formik.errors.confirmpassword && formik.touched.confirmpassword ? <span className="text-danger">{formik.errors.confirmpassword}</span> : null}
                 </Grid>                
 </Grid>

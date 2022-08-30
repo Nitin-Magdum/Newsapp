@@ -12,6 +12,8 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import apiConfig from "../config";
 import axios from "axios";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -49,6 +51,15 @@ export default function Forgetpassword() {
   const[y,z]=React.useState("")
   const[t,u]=React.useState("")
   let navigate = useNavigate();
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+      setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   const handle=(event)=>{
     d(event.target.value)
   }
@@ -70,6 +81,7 @@ axios.post(`${apiConfig.authapi}/forgotpassword`,e).then(data=>{
   if(data.data.status==401){
 document.getElementById("exist").innerText="Email id doesn't exist"
   }else{
+    handleOpen()
     document.getElementById("exist").innerText=""
     document.getElementById("otp").innerText=""
   document.getElementById("pass").innerText=""
@@ -110,6 +122,7 @@ if(data.data.status==500){
   const classes = useStyles();
 
   return (
+    <div>
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
@@ -244,7 +257,7 @@ if(data.data.status==500){
                   alignItems="center"
                   justifyContent="center"
                 >
-                  <Link href="/" variant="body2">
+                  <Link href="/SignIn" variant="body2">
                     {"Go to Login page"}
                   </Link>
                 </Grid>
@@ -254,5 +267,11 @@ if(data.data.status==500){
         </Grid>
       </Grid>
     </ThemeProvider>
+    <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+      OTP sent to email
+    </Alert>
+  </Snackbar>
+  </div>
   );
 }

@@ -4,6 +4,8 @@ import axios from "axios";
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -12,6 +14,16 @@ import apiConfig from "../config";
 import { useNavigate } from "react-router-dom";
 export default function Showingcard(props) {
   const navigate = useNavigate();
+  const [open, setOpen] = React.useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
   function addToFavourite(v){
     fetch(`${apiConfig.authapi}/isAuthenticated`, {
       method: 'POST',
@@ -25,11 +37,13 @@ export default function Showingcard(props) {
               navigate('/SignIn');
           } else {
             axios.post(`${apiConfig.Favouritesapi}/AddToFavourites`,v)
+            handleOpen()
           }
       });
   }
   
   return (
+    <>
     <Card sx={{ maxWidth: 345 }} >
     <CardMedia
       component="img"
@@ -59,10 +73,15 @@ export default function Showingcard(props) {
           }
           addToFavourite(values);
         }}/>
-      </Grid>
-      
-      
+      </Grid>   
     </CardActions>
   </Card>
+  <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+  <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+     Added to favourites
+  </Alert>
+</Snackbar>
+</>
+
   )
 }

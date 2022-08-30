@@ -1,7 +1,7 @@
 import React from 'react'
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 import Input from '@mui/material/Input';
 import Grid from '@mui/material/Grid';
 import axios from 'axios';
@@ -14,6 +14,7 @@ export default function UpdateProfile(props) {
     const [a,b]=React.useState("")
   const [c,e]=React.useState("")
   const [y,z]=React.useState(false)
+  const[get,set]=React.useState(0)
     const handleChange1=(event)=>{
         b(event.target.value)
       }
@@ -27,6 +28,13 @@ export default function UpdateProfile(props) {
           z(true)
         }
           }
+          React.useEffect(()=>{
+            var d1=localStorage.getItem("email")
+            axios.get(`${apiConfig.Favouritesapi}/GetFavourites/${d1}`).then(data=>{
+              var ss=data.data.length
+              set(ss)
+            })
+          })
       const submitChange=()=>{
         var v={
             "firstname":a,
@@ -39,6 +47,7 @@ export default function UpdateProfile(props) {
         navigate('/')
       }
   return (
+    <>
         <Grid container spacing={2}>
 <Grid item xs={4}>
 <Button variant="contained"sx={{ml:16}}style={{textDecoration:'none' ,color:'whitesmoke'}} onClick={edit}>Update Profile </Button>
@@ -56,5 +65,8 @@ export default function UpdateProfile(props) {
       </InputLabel>
       <Button variant="contained" sx={{ml:46,mt:2}} onClick={submitChange}>Save</Button></div>:null}
 </Grid>
+<Typography sx={{mt:3}}>Favourites added : {get} <Button href="/favourite">Click to view</Button></Typography>
+</>
+
   )
 }

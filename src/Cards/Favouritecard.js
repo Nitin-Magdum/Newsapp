@@ -15,6 +15,7 @@ export default function Favouritecard(props) {
         axios.delete(`${apiConfig.Favouritesapi}/DeleteFromFavourites/?email=${d}&q=${value}`)
     }
   return (
+    <>
     <Card sx={{ maxWidth: 345 }} >
     <CardMedia
       component="img"
@@ -38,10 +39,9 @@ export default function Favouritecard(props) {
           var value=props.id
           RemoveFromFavourite(value);
         }}/>
-      </Grid>
-      
-      
+      </Grid>      
     </CardActions>
   </Card>
+</>
   )
 }
