@@ -7,7 +7,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -16,7 +16,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import apiConfig from "../config";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   "@global": {
     body: {
@@ -184,7 +184,7 @@ const classes = useStyles();
                   alignItems="center"
                   justifyContent="center"
                 >
-                  <Link href="/SignIn" variant="body2">
+                  <Link to="/SignIn" variant="body2">
                     {"Already Have Account? Sign-In "}
                   </Link>
                 </Grid>

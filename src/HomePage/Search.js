@@ -16,12 +16,7 @@ React.useEffect(()=>{
     if(a.getfun===""){
 navigate('/')
     }else{
-        axios.get(`${apiConfig.thirdpartyapi}/news/search?q=${a.getfun}`,{
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('token')
-              }            
-        })
+        axios.get(`${apiConfig.thirdpartyapi}/news/search?q=${a.getfun}`)
           .then(data=>{
               get(data.data)
           })

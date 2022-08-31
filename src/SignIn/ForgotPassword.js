@@ -7,7 +7,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -19,7 +19,7 @@ import axios from "axios";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LockResetIcon from "@mui/icons-material/LockReset";
 // import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   "@global": {
     body: {
@@ -257,7 +257,7 @@ if(data.data.status==500){
                   alignItems="center"
                   justifyContent="center"
                 >
-                  <Link href="/SignIn" variant="body2">
+                  <Link to="/SignIn" variant="body2">
                     {"Go to Login page"}
                   </Link>
                 </Grid>

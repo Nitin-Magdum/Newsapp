@@ -4,7 +4,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -14,6 +14,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import AuthHoc from "../HomePage/AuthHOC";
 import apiConfig from "../config";
 import axios from "axios";
+import { Link } from "react-router-dom";
 const theme = createTheme();
 
 
@@ -28,7 +29,7 @@ const theme = createTheme();
           localStorage.setItem("token", data.data.token);
           localStorage.setItem("email", email);
           navigate("/"); 
-          document.getElementById("emailid").innerText=""
+          // document.getElementById("emailid").innerText=""
         }
       });
       // console.log(document.cookie)
@@ -128,7 +129,7 @@ const theme = createTheme();
                   alignItems="center"
                   justifyContent="center"
                 >
-                  <Link href="/Forgetpassword" variant="body2">
+                  <Link to="/Forgetpassword" variant="body2">
                     {"Forgot Password ? "}
                   </Link>
                 </Grid>
@@ -142,7 +143,7 @@ const theme = createTheme();
                   alignItems="center"
                   justifyContent="center"
                 >
-                  <Link href="/SignUp" variant="body2">
+                  <Link to="/SignUp" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
